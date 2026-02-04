@@ -37,3 +37,6 @@ testcases/*.ans
 *.tmp
 *.swp
 *.bak
+
+# ===== Created Output Files =====
+output/

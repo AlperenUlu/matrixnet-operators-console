@@ -9,7 +9,9 @@ import java.util.LinkedList;
 public class HashTable<V> {
 
     private int capacity; // The fixed size of the internal array
+    private int size; // Total number of elements stored
     private LinkedList<Entry<V>>[] table; // The array where each index holds a list of entries
+    private LinkedList<V> allValues; // Auxiliary list to keep all values for iteration
 
     /**
      * Constructor to initialize the Hash Table.
@@ -18,6 +20,8 @@ public class HashTable<V> {
     public HashTable() {
         this.capacity = 50077; // Assigning a prime number size to reduce collisions
         this.table = new LinkedList[this.capacity];
+        this.allValues = new LinkedList<>();
+        this.size = 0;
     }
 
     /**
@@ -48,6 +52,10 @@ public class HashTable<V> {
         // Create a new entry since the key is new
         Entry<V> newEntry = new Entry<>(key, value);
         entryList.add(newEntry);
+
+        // Add to the linked list to get all values faster
+        allValues.add(value);
+        size++;
     }
 
     /**
@@ -111,5 +119,18 @@ public class HashTable<V> {
         }
         // Return the positive version of the hash
         return Math.abs(hashcode);
+    }
+    /**
+     * @return The total number of unique items in the table.
+     */
+    public int getSize() {
+        return size;
+    }
+    /**
+     * Returns the linear list of all values.
+     * @return A LinkedList containing all values.
+     */
+    public LinkedList<V> getAllValues() {
+        return allValues;
     }
 }

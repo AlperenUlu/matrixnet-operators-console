@@ -5,7 +5,7 @@ import java.util.LinkedList;
  * This class handles the creation of the graph structure, pathfinding, connectivity analysis, and graph reporting.
  */
 public class MatrixManager {
-    private HostTable<Host> hostTable;
+    private HashTable<Host> hostTable;
     private int totalClearance = 0;
     private int totalBandwidth = 0;
     private int totalUnsealedBackdoors = 0;
@@ -14,7 +14,7 @@ public class MatrixManager {
      * Constructs a new MatrixManager with an empty host table.
      */
     MatrixManager() {
-        this.hostTable = new HostTable<>();
+        this.hostTable = new HashTable<>();
     }
 
     /**
@@ -38,7 +38,7 @@ public class MatrixManager {
         }
         else {
             Host newHost = new Host(hostID, clearanceLevel);
-            hostTable.put(newHost);
+            hostTable.put(hostID, newHost);
 
             // Update global stats
             totalClearance += clearanceLevel;
@@ -377,7 +377,7 @@ public class MatrixManager {
         int componentCount = 0;
         boolean hasCycle = false;
 
-        LinkedList<Host> allHosts = hostTable.getAllUsers();
+        LinkedList<Host> allHosts = hostTable.getAllValues();
         HashTable<Boolean> visited = new HashTable<>();
 
         // Map to track the parent of each node in the BFS tree.
@@ -746,8 +746,8 @@ public class MatrixManager {
      * @param excludedHost     A host to ignore during traversal
      * @return The number of connected components.
      */
-    public int countConnectedComponents(HostTable<Host> currentHostTable, Host excludedHost) {
-        LinkedList<Host> allHosts = currentHostTable.getAllUsers();
+    public int countConnectedComponents(HashTable<Host> currentHostTable, Host excludedHost) {
+        LinkedList<Host> allHosts = currentHostTable.getAllValues();
         HashTable<Boolean> visited = new HashTable<>();
 
         // If excludedHost is provided, mark it as visited upfront.

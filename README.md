@@ -129,7 +129,6 @@ linear-time analysis.
 ├── Path.java              # Route representation
 ├── MatrixManager.java     # Core orchestration logic
 ├── HashTable.java         # Custom hash table implementation
-├── HostTable.java         # Host indexing structure
 ├── MinimumHeap.java       # Custom min-heap for routing
 ├── Entry.java             # Auxiliary data holder
 ├── test_runner.py         # Automated test runner
